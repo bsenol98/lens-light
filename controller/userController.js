@@ -12,7 +12,9 @@ const loginUserView = async (req, res) => {
     } else if (!passwordHash.verify(req.body.pass, findUser.pass)) {
         return res.render("login", { "valid": false, "err": ["Kullanıcı adı veya şifre hatalıdır!"] });
     }
-    const token = jwt.sign({ "user": findUser }, process.env.JWT_KEY);
+    
+    const userId = findUser._id
+    const token = jwt.sign({ userId }, process.env.JWT_KEY);
     res.cookie('token', token, { "maxAge": 1000 * 60 * 15 });
     return res.redirect('/panel');
 }

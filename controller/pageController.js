@@ -1,19 +1,16 @@
 
-const getIndexPage = (req, res) => res.render("index")
+const getIndexPage = (req, res) => res.render("index", { "link": "index" })
 
-const getAboutPage = (req, res) => res.render("about")
+const getAboutPage = (req, res) => res.render("about", { "link": "about" })
 
-const getRegisterPage = (req, res) => res.render("register")
+const getPhotosPage = (req, res) => res.render("about", { "link": "photos" })
 
-const getLoginPage = (req, res) => res.render("login")
+const getRegisterPage = (req, res) => res.render("register", { "link": "register" })
 
+const getLoginPage = (req, res) => res.render("login", { "link": "login" })
 
-const getPanelPage = (req, res) => {
-    res.render("panel", {
-        "session": true,
-        "data": req.userAuth
-    })
-}
+const getPanelPage = (req, res) => res.render("panel", { "link": "panel" })
+
 const getLogoutPage = (req, res) => {
     res.cookie('token', "", { "maxAge": 0 });
     res.redirect("/login");
@@ -22,6 +19,7 @@ const getLogoutPage = (req, res) => {
 export {
     getIndexPage,
     getAboutPage,
+    getPhotosPage,
     getRegisterPage,
     getLoginPage,
     getPanelPage,

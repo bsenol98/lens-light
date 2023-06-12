@@ -6,6 +6,7 @@ import photoRoute from "./routes/photoRoute.js";
 import userRoute from "./routes/userRoute.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import { userCheck } from "./middlewares/authMiddlewares.js";
 
 global.DB_CONN_CHECK = false;
 dotenv.config();
@@ -31,20 +32,10 @@ app.use("/", function (req, res, next) {
     }
     next();
 })
+
+app.get("*", userCheck);
 app.use("/", pageRoute);
 app.use("/photos", photoRoute);
 app.use("/user", userRoute);
-
-// import User from "./models/userModel.js";
-
-import jwt from "jsonwebtoken";
-app.get("/hi", async (req, res) => {
-    const token = jwt.sign({ foo: 'bar' }, '$4mtK]MMV=]~C2E1A!CQmlT9i%LnSq');
-    res.send(token);
-
-    // const phoneCheck = await User.findOne({ $or: [{ "phone": "535" }, { "mail": "berkant@gmail.com" }] });
-    // console.log("check", phoneCheck);
-    // res.send(phoneCheck);
-})
 
 app.listen(port, () => console.log(`http://localhost:${port}/`));
