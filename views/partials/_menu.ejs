@@ -1,0 +1,38 @@
+<header class="header-area dark-theme">
+  <div class="container-fluid">
+    <div class="row ">
+
+      <div class=" col-md-2 col-sm-3">
+        <div class="logo">
+          <a href="/"><span class="lens-logo dark-theme">lens</span><br><span>light</span></a>
+        </div>
+      </div>
+      <div class="col-md-7 col-sm-9">
+        <div class="navbar-area">
+          <nav class="site-navbar">
+            <ul>
+              <li><a class="active" href="/">Home</a></li>
+              <li><a href="/about">About</a></li>
+              <li><a href="/photos">Photos</a></li>
+            </ul>
+            <button class="nav-toggler dark-theme">
+              <span class="dark-theme"></span>
+            </button>
+          </nav>
+        </div>
+      </div>
+      <div class=" col-md-3 di_none">
+        <ul class="email text_align_right">
+          <% if(typeof session !=="undefined" && session===true) { %>
+          <li><a href="/logout">Logout</a></li>
+          <% } else { %>
+          <li><a href="/login">Login</a></li>
+          <li><a href="/register">Register</a></li>
+          <% }  %>
+          <li><a href="Javascript:void(0)"><i class="fa fa-search" aria-hidden="true"></i></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>

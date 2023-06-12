@@ -1,0 +1,50 @@
+<%- include("partials/_header") %>
+
+    <body class="main-layout inner_page">
+        <!-- loader  -->
+        <div class="loader_bg">
+            <div class="loader"><img src="images/loading.gif" alt="#" /></div>
+        </div>
+        <!-- end loader -->
+
+        <%- include("partials/_menu") %>
+            <!-- contact -->
+            <div class="contact">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 ">
+                            <div class="titlepage text_align_center">
+                                <h2>Login</h2>
+                            </div>
+                        </div>
+                        <div class="col-md-8 offset-md-2">
+
+                            <form method="post" action="/login" class="main_form">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input class="form_control" placeholder="User Name" type="type" name="username"
+                                            required>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input class="form_control" placeholder="Password" type="password" name="pass"
+                                            required>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="group_form">
+                                            <button class="send_btn">Login</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <% for(let i=0; i < (Array.isArray((typeof err==="undefined" ? false : err)) ? err :
+                                []).length;i++) { %>
+                                <div class="alert alert-danger">
+                                    <%=err[i]%>
+                                </div>
+                                <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <%- include("partials/_footer") %>
