@@ -33,7 +33,7 @@ app.use("/", function (req, res, next) {
     next();
 })
 
-app.get("*", userCheck);
+app.use("*", userCheck);
 app.use("/", pageRoute);
 app.use("/photos", photoRoute);
 app.use("/user", userRoute);

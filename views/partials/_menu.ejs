@@ -11,15 +11,15 @@
         <div class="navbar-area w-100 d-flex justify-content-end">
           <nav class="site-navbar">
             <ul>
-              <li><a class="<%= link === 'index' && 'active' %>" href="/">Home</a></li>
-              <li><a class="<%= link === 'about' && 'active' %>" href="/about">About</a></li>
-              <li><a class="<%= link === 'photos' && 'active' %>" href="/photos">Photos</a></li>
-              <% if(user) { %>
-              <li><a class="<%= link === 'panel' && 'active' %>" href="/panel">Panel</a></li>
+              <li><a class="<%= typeof link != "undefined" && link === 'index' && 'active' %>" href="/">Home</a></li>
+              <li><a class="<%= typeof link != "undefined" && link === 'about' && 'active' %>" href="/about">About</a></li>
+              <li><a class="<%= typeof link != "undefined" && link === 'photos' && 'active' %>" href="/photos">Photos</a></li>
+              <% if(typeof user != "undefined" && user) { %>
+              <li><a class="<%= typeof link != "undefined" && link === 'panel' && 'active' %>" href="/panel">Panel</a></li>
               <li><a href="/logout">Logout</a></li>
               <% } else { %>
-              <li><a class="<%= link === 'login' && 'active' %>" href="/login">Login</a></li>
-              <li><a class="<%= link === 'register' && 'active' %>" href="/register">Register</a></li>
+              <li><a class="<%= typeof link != "undefined" && link === 'login' && 'active' %>" href="/login">Login</a></li>
+              <li><a class="<%= typeof link != "undefined" && link === 'register' && 'active' %>" href="/register">Register</a></li>
               <% }  %>
             </ul>
             <button class="nav-toggler dark-theme">

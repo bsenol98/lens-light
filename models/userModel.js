@@ -31,9 +31,7 @@ const userSchema = new Schema({
 
 userSchema.pre("save", function (next) {
     const user = this;
-    console.log(user.pass);
     user.pass = passwordHash.generate(user.pass);
-    console.log("HASH =>", user.pass);//passwordHash.verify('password123', hashedPassword)
     next()
 });
 const User = mongoose.model("User", userSchema)

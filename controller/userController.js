@@ -6,13 +6,14 @@ import jwt from "jsonwebtoken";
 
 const loginUserView = async (req, res) => {
     const findUser = await User.findOne({ "username": req.body.username });
-
+    console.log(findUser);
+    
     if (findUser == null) {
         return res.render("login", { "valid": false, "err": ["Kullanıcı adı veya şifre hatalıdır!"] });
     } else if (!passwordHash.verify(req.body.pass, findUser.pass)) {
         return res.render("login", { "valid": false, "err": ["Kullanıcı adı veya şifre hatalıdır!"] });
     }
-    
+
     const userId = findUser._id
     const token = jwt.sign({ userId }, process.env.JWT_KEY);
     res.cookie('token', token, { "maxAge": 1000 * 60 * 15 });

@@ -1,3 +1,4 @@
+import * as photoController from "./photoController.js";
 
 const getIndexPage = (req, res) => res.render("index", { "link": "index" })
 
@@ -9,7 +10,10 @@ const getRegisterPage = (req, res) => res.render("register", { "link": "register
 
 const getLoginPage = (req, res) => res.render("login", { "link": "login" })
 
-const getPanelPage = (req, res) => res.render("panel", { "link": "panel" })
+const getPanelPage = async (req, res) => {
+    const photos = await photoController.getPhotosByUserId(res.locals.user._id);
+    res.render("panel", { "link": "panel", photos });
+}
 
 const getLogoutPage = (req, res) => {
     res.cookie('token', "", { "maxAge": 0 });

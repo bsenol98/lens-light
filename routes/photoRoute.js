@@ -3,7 +3,7 @@ import * as photoController from "../controller/photoController.js";
 
 const router = express.Router()
 
-router.route("/").get(photoController.photosView)
+router.route("/").get(photoController.photosView).post(photoController.createPhotoView)
 router.route("/:id").get(photoController.getPhotosByIdView);
 
 router.route("/api/kontrol").get(photoController.getAllPhotosKontrol)

@@ -16,6 +16,10 @@ const PhotoSchema = new Schema({
     uploadedDate: {
         type: Date,
         default: Date.now
+    },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: "User"
     }
 });
 
