@@ -15,7 +15,8 @@
               <li><a class="<%= typeof link != "undefined" && link === 'about' && 'active' %>" href="/about">About</a></li>
               <li><a class="<%= typeof link != "undefined" && link === 'photos' && 'active' %>" href="/photos">Photos</a></li>
               <% if(typeof user != "undefined" && user) { %>
-              <li><a class="<%= typeof link != "undefined" && link === 'panel' && 'active' %>" href="/panel">Panel</a></li>
+              <li><a class="<%= typeof link != "undefined" && link === 'user' && 'active' %>" href="/user">User</a></li>
+              <li><a class="<%= typeof link != "undefined" && link === 'panel' && 'active' %>" href="/panel">Dashboard</a></li>
               <li><a href="/logout">Logout</a></li>
               <% } else { %>
               <li><a class="<%= typeof link != "undefined" && link === 'login' && 'active' %>" href="/login">Login</a></li>

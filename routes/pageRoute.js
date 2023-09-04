@@ -8,7 +8,6 @@ const router = express.Router()
 
 router.route("/").get(pageController.getIndexPage)
 router.route("/about").get(pageController.getAboutPage)
-router.route("/photos").get(pageController.getPhotosPage)
 router.route("/login").get(pageController.getLoginPage).post(userController.loginUserView)
 router.route("/register").get(pageController.getRegisterPage).post(userController.createUserView)
 router.route("/logout").get(authMiddlewares.AuthenticationToken, pageController.getLogoutPage)

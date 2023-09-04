@@ -3,7 +3,8 @@ import { v2 as cloudinary } from 'cloudinary';
 import fs from 'fs';
 
 const photosView = async (req, res) => {
-    const photosResult = await getAllPhotos();
+    const userId = res?.locals?.user?._id;
+    const photosResult = await getAllPhotos(userId);
     res.status(200).render("photos", { photosResult })
 }
 const getPhotosByIdView = async (req, res) => {
@@ -58,10 +59,10 @@ const createPhoto = async payload => {
     }
 }
 
-const getAllPhotos = async (req, res) => ({
+const getAllPhotos = async (notInId = null) => ({
     valid: true,
     err: [],
-    data: await Photo.find({})
+    data: await Photo.find(notInId === null ? ({}) : ({ user: { $ne: notInId } }))
 })
 
 const getAllPhotosKontrol = async (req, res) => {

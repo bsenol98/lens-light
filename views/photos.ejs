@@ -1,47 +1,47 @@
 <%- include("partials/_header") %>
 
-   <body class="main-layout inner_page">
-      <!-- loader  -->
-      <%- include("partials/_menu") %>
+<body class="main-layout inner_page">
+  <!-- loader  -->
+  <%- include("partials/_menu") %>
 
-         <div class="loader_bg">
-            <div class="loader"><img src="images/loading.gif" alt="#" /></div>
-         </div>
-         <!-- end loader -->
+  <div class="loader_bg">
+    <div class="loader"><img src="/images/loading.gif" alt="#" /></div>
+  </div>
+  <!-- end loader -->
 
 
-         <!-- gallery -->
-         <div class="gallery">
-            <div class="container_with">
-               <div class="row">
-                  <div class="col-md-12">
-                     <div class="titlepage text_align_center">
-                        <span>03</span>
-                        <h2>Our gallery</h2>
-                     </div>
-                  </div>
-               </div>
-               <div class="tz-gallery">
-                  <div class="row">
-                     <% for(item of photosResult.data) {%>
-                        <div class="col-lg-4 col-md-6 ma_bottom30">
-                           <div class="lightbox">
-                              <img src="images/g1.jpg" alt="Bridge">
-                              <div class="view_main">
-                                 <div class="pose">
-                                    <a class="read_more" href="/photos/<%=item._id%>"><img src="images/ga.png" alt="#" /></a>
-                                    <p>test<%= item.name %> </p>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <% }%>
-                           <div class="col-md-12">
-                              <a class="plus_btn" href="gallery.html">+</a>
-                           </div>
-                  </div>
-               </div>
+  <!-- gallery -->
+  <div class="gallery">
+    <div class="container_with">
+      <div class="row d-none">
+        <div class="col-md-12">
+          <div class="titlepage text_align_center">
+            <span>03</span>
+            <h2>Our gallery</h2>
+          </div>
+        </div>
+      </div>
+      <div class="tz-gallery">
+        <div class="row">
+          <% for(item of photosResult.data) {%>
+          <div class="col-lg-4 col-md-6 ma_bottom30">
+            <div class="lightbox">
+              <img src="<%=item.url%>" alt="Bridge">
+              <div class="view_main">
+                <div class="pose">
+                  <a class="read_more" href="/photos/<%=item._id%>"><img src="images/ga.png" alt="#" /></a>
+                  <p>test<%= item.name %> </p>
+                </div>
+              </div>
             </div>
-         </div>
+          </div>
+          <% }%>
+          <div class="col-md-12 d-none">
+            <a class="plus_btn" href="gallery.html">+</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-         <%- include("partials/_footer") %>
+  <%- include("partials/_footer") %>

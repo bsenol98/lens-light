@@ -5,7 +5,7 @@
       <%- include("partials/_menu") %>
 
          <div class="loader_bg">
-            <div class="loader"><img src="images/loading.gif" alt="#" /></div>
+            <div class="loader"><img src="/images/loading.gif" alt="#" /></div>
          </div>
          <div class="about">
             <div class="container">
@@ -15,7 +15,7 @@
                         <span>01</span>
                         <h2><%= photo.name %></h2>
                         <p><%= photo.description %></p>
-                        <a class="read_more" href="about.html">photographer: <%= photo.user.username %></a>
+                        <a class="read_more" href="/user/<%=photo.user._id%>">photographer: <%= photo.user.username %></a>
                      </div>
                   </div>
                   <div class="col-md-6">

@@ -1,4 +1,6 @@
 import User from "../models/userModel.js";
+import Photo from "../models/photoModel.js";
+import helperFun from "../helper/helperFunctions.js";
 import passwordHash from 'password-hash';
 import jwt from "jsonwebtoken";
 
@@ -7,7 +9,7 @@ import jwt from "jsonwebtoken";
 const loginUserView = async (req, res) => {
     const findUser = await User.findOne({ "username": req.body.username });
     console.log(findUser);
-    
+
     if (findUser == null) {
         return res.render("login", { "valid": false, "err": ["Kullanıcı adı veya şifre hatalıdır!"] });
     } else if (!passwordHash.verify(req.body.pass, findUser.pass)) {
@@ -23,21 +25,40 @@ const createUserView = async (req, res) => {
     const result = await createUser(req.body);
     res.render("register", result);
 }
+const userList = async (req, res) => {
+    const userList = await getAllUser(res?.locals?.user?._id);
+    res.render("users", { userList });
+}
+const userDetail = async (req, res) => {
+    const userId = helperFun.toObjectId(req.params.id);
+    const result = await getUserById(userId);
+    res.render("user", { result });
+}
+
 const updateUserView = async (req, res) => {
     const result = await createUser(req.body);
     res.render("register", result);
 }
 
-const getAllUser = async (req, res) => {
-    const userList = await User.find({});
-    const length = userList.length;
-    res.status(200).json({
-        "valid": true,
-        "data": userList,
-        "err": [],
-        "recordsTotal": length,
-        "recordsFiltered": length,
-    });
+const getAllUser = async (notInId = null) => {
+    try {
+        const query = {}
+        if (notInId !== null) query["_id"] = { $ne: notInId };
+
+        const userList = await User.find(query);
+        return {
+            "valid": true,
+            "data": userList,
+            "err": [],
+        }
+    } catch (error) {
+        return {
+            "valid": false,
+            "data": [],
+            "err": ["Kullanıcılar listelenirken bir hata oluştu!"]
+        }
+    }
+
 }
 const createUser = async data => {
     try {
@@ -57,6 +78,27 @@ const createUser = async data => {
             valid: false,
             data: {},
             err: [error]
+        }
+    }
+}
+const getUserById = async userId => {
+    try {
+        const userData = await User.findById(userId);
+        const userPhotoList = await Photo.find({ user: userId });
+        return {
+            "valid": true,
+            "data": {
+                "user": userData,
+                "photoList": userPhotoList
+            },
+            "err": [],
+        }
+    } catch (error) {
+        console.log(error);
+        return {
+            "valid": false,
+            "data": [],
+            "err": ["Kullanıcı bulunurken bir hata oluştu!"]
         }
     }
 }
@@ -89,5 +131,7 @@ export {
     updateUserView,
     getAllUser,
     createUser,
-    loginUserView
+    loginUserView,
+    userList,
+    userDetail
 }
